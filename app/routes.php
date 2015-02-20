@@ -50,16 +50,16 @@ Route::get('user/{id}/profile', function( $id ) {
 	$user = User::find($id);
 
 	if ($user->type == "student") {
-		$assessment_users = AssessmentUser::where('student_no', $user->username)->first();
-
+		$assessment_users 	= AssessmentUser::where('student_no', $user->username)->first();
+		$p_history	= PaymentHistory::where('student_no', $user->username)->first();
 		return View::make('container.user')
-			->with('user', $user)
-			->with('u_a', $assessment_users);
+		->with('user', $user)
+		->with('u_a', $assessment_users)
+		->with('p_history', $p_history);
 	} else {
 		return View::make('container.user')
-			->with('user', $user);
+		->with('user', $user);
 	}
-
 });
 
 Route::get('register/{student_no}/student', function( $student_no ) {
@@ -298,4 +298,16 @@ Route::get('fetch/users', function() {
 		}
 	}
 	return json_encode($json);
+});
+
+Route::post('student/{id}/update/payment', function( $id ) {
+	$a_u = AssessmentUser::find($id);
+	$a_u->payment_date1 = Input::get('p_d1');
+	$a_u->payment_date2 = Input::get('p_d2');
+	$a_u->payment_date3 = Input::get('p_d3');
+	$a_u->payment_date4 = Input::get('p_d4');
+	$a_u->payment_date5 = Input::get('p_d5');
+	$a_u->save();
+
+	return Redirect::back();
 });

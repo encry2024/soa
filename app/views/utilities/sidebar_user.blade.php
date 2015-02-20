@@ -2,11 +2,14 @@
 
 
 
-<div class="large-2 small-12 columns push-1" style=" border-right-style: solid; border-right-width: 2px; border-right-color: #DDD; margin-top: 2rem !important;">
-	<div class="sidebar " style=" margin-right: 1rem; ">
+<div class="large-2 small-12 columns" style=" border-right-style: solid; border-right-width: 2px; border-right-color: #DDD; margin-top: 2rem !important;">
+	<div class="sidebar ">
 		<ul class="side-nav">
 			@if (Auth::user()->type != 'student')
-				<li>{{ Form::submit('Update' , $attributes = array('class' => 'size-14 nsi-btn button tiny radius right', 'name' => 'submit')) }}</li><br>
+				<li>{{Form::submit('Update Payment', ['class'=>'button login-btn small radius right size-14'])}}</li>
+			@else
+				<li>{{ link_to('#', 'Payment Breakdown', ['class'=>'button login-btn small radius right size-14', 'data-reveal-id' => 'payment_breakdown']) }}</li>
+
 			@endif
 			
 			<br><br>

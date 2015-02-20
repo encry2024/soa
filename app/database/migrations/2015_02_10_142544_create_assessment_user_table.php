@@ -31,6 +31,11 @@ class CreateAssessmentUserTable extends Migration {
 			$table->string('acctg1_set')->nullable();
 			$table->string('acctg2_set')->nullable();
 			$table->string('total_assessment')->nullable();
+			$table->string('payment_date1')->nullable();
+			$table->string('payment_date2')->nullable();
+			$table->string('payment_date3')->nullable();
+			$table->string('payment_date4')->nullable();
+			$table->string('payment_date5')->nullable();
 			$table->string('prelim')->nullable();
 			$table->string('midterm')->nullable(); 
 			$table->string('pre_final')->nullable();
