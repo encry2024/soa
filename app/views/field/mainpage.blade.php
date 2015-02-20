@@ -1,27 +1,13 @@
 
-<div class="row">
+
 	@if (Auth::user()->type != "student")
+	<div class="row">
 		@include('backend.mainpage')
-	@else
-	<div class="large-10 columns large-centered" style="margin-left: 13rem;">
-		<br>
-		<label class="size-20 nsi-asset-fnt">- Balance Information -<span style="margin-left: 30rem;"></label>
-		<br>
-		<div class="row">
-			<div class="large-10 columns large-centered">
-				<br>
-				<label class="size-16 nsi-asset-fnt label-white">-Outstanding Balance-<span style="margin-left:30rem;"></span></label>
-				<br>
-				<label class="size-16 nsi-asset-fnt label-white">-Total Balance-<span style="margin-left:30rem;"> {{$student_info->total_assessment}}</span></label>
-				<br><br>
-				{{ link_to('#', 'Payment Breakdown', ['class'=>'button login-btn small radius right size-14', 'data-reveal-id' => 'payment_breakdown']) }}
-				<br><br>
-			</div>
-			<br>
-		</div>
 	</div>
+	@else
+		@include('student.payments')
 	@endif
-</div>
+
 
 <!-- ADD USER MODAL -->
 
@@ -134,7 +120,7 @@
 		<label class="size-18 label-black large-12 label-ln-ht-1">Payment Breakdown</label>
 	</div>
 	<div class="row">
-		<div class="large-4 columns">
+		<div class="large-6 columns">
 		<br><br>
 			{{ Form::label('', "Athletic Fee", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
 			{{ Form::text('outstanding_balance', $student_info->athletic_fee , array('class' => 'radius', 'readOnly')) }}
@@ -155,7 +141,7 @@
 			{{ Form::text('total', $student_info->student_events , array('class' => 'radius', 'readOnly')) }}
 		</div>
 		<br><br>
-		<div class="large-4 columns">
+		<div class="large-6 columns">
 			{{ Form::label('', "Amadeus", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
 			{{ Form::text('total', $student_info->amadeus , array('class' => 'radius', 'readOnly')) }}
 
@@ -171,7 +157,18 @@
 			{{ Form::label('', "ACCTG 2 Set", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
 			{{ Form::text('total', $student_info->acctg2_set , array('class' => 'radius', 'readOnly')) }}
 		</div>
-		<div class="large-4 columns">
+		<a class="close-reveal-modal">&#215;</a>
+	</div>
+</div>
+
+<div id="persem" class="reveal-modal small" data-reveal>
+	<div class="panel modal-title cus-pan-hd-3 radius">
+		<label class="size-18 label-black large-12 label-ln-ht-1">Per/Sem Breakdown</label>
+	</div>
+	<div class="row">
+		<div class="large-12 columns">
+		<br><br>
+		<div class="large-12 columns">
 			{{ Form::label('', "PRELIM", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
 			{{ Form::text('total', $student_info->prelim , array('class' => 'radius', 'readOnly')) }}
 
@@ -184,7 +181,9 @@
 			{{ Form::label('', "FINALS", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
 			{{ Form::text('total', $student_info->final , array('class' => 'radius', 'readOnly')) }}
 		</div>
-		<a class="close-reveal-modal">&#215;</a>
+		
 	</div>
+	<a class="close-reveal-modal">&#215;</a>
 </div>
 @endif
+

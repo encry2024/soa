@@ -823,19 +823,19 @@ table tr.even {background: #edf2f7 !important;}
 
 .cs-pull-1 {
 	position: relative;
-	right: 36.43333%;
+	right: 34.152333%;
 	left: auto;
 }
 
 .cs-pull-2 {
 	position: relative;
-	right: 3.833333%;
+	right: -2.166667%;
 	left: auto;
 }
 
 .push-1-2 {
 	position: relative;
-	left: 21.23333%;
+	left: 29.23333%;
 	right: auto;
 }
 
@@ -847,18 +847,42 @@ table tr.even {background: #edf2f7 !important;}
 
 .push-1-4 {
 	position: relative;
-	left: 2.23333%;
+	left: 5%;
 	right: auto;
 }
 
 .cs-pull-1-1 {
 	position: relative;
-	right: 37.2333%;
+	right: 30.0952333%;
 	left: auto;
 }
 
 .cs-push-1-1 {
 	position: relative;
 	left: 5.5623333%;
+	right: auto;
+}
+
+.c-st-p-1 {
+	position: relative;
+	right: 34.352333%;
+	left: auto;
+}
+
+.c-st-p-2 {
+position: relative;
+left: 3.5%;
+right: auto;
+}
+
+.c-st-p-3 {
+position: relative;
+right: 30.395233%;
+left: auto;
+}
+
+.c-st-ph-1 {
+	position: relative;
+	left: 3.5%;
 	right: auto;
 }

@@ -28,8 +28,12 @@ Route::get('add/user', function() {
 Route::get('mainpage', function() {
 	
 	$student = AssessmentUser::where('student_no', Auth::user()->username)->first();
-	return View::make('container.mainpage')->with('student_info', $student);
-
+	$assessment_users 	= AssessmentUser::where('student_no', Auth::user()->username)->first();
+	$p_history	= PaymentHistory::where('student_no', Auth::user()->username)->first();
+	return View::make('container.mainpage')
+	->with('student_info', $student)
+	->with('u_a', $assessment_users)
+	->with('p_history', $p_history);
 });
 
 Route::get('logout', function() {

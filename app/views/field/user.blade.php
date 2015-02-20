@@ -9,7 +9,7 @@
 
 @endif
 
-@if($user->type == "financer" OR $user->type == "trusted")
+@if($user->type == "Cashier")
 
 <div class="row">
 	<div class="large-10 columns large-centered" style="margin-left: 13rem;">

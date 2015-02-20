@@ -20,7 +20,7 @@
 				<li>{{ link_to('logout', ' Logout', ["class" => "fi-power"]) }}</li>
 			</ul>
 		</section>
-	@else
+	@elseif (Auth::user()->type == "student")
 		<ul class="right">
 				<li class="divider"></li>
 				<li><a href="#">Welcome :: {{ Auth::user()->lastname }}, {{ Auth::user()->firstname }} </a></li>

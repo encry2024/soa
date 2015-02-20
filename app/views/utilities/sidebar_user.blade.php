@@ -7,9 +7,9 @@
 		<ul class="side-nav">
 			@if (Auth::user()->type != 'student')
 				<li>{{Form::submit('Update Payment', ['class'=>'button login-btn small radius right size-14'])}}</li>
+				{{ link_to('#', 'Payment Breakdown', ['class'=>'button login-btn small radius right size-14', 'data-reveal-id' => 'payment_breakdown']) }}
 			@else
 				<li>{{ link_to('#', 'Payment Breakdown', ['class'=>'button login-btn small radius right size-14', 'data-reveal-id' => 'payment_breakdown']) }}</li>
-
 			@endif
 			
 			<br><br>
