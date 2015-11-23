@@ -1,12 +1,71 @@
 
 
 	@if (Auth::user()->type != "student")
-	<div class="row">
-		@include('backend.mainpage')
-	</div>
+
+		<br><br><br><br>
+		<div class="large-10 small-12 columns large-centered mainpage-container right">
+			<div class="row">
+				<div class="large-12 small-12 large-centered">
+					@if ($notification = Session::get('msg'))
+					<br>
+						<div data-alert class="alert-box success ">
+							<label class="text-center label-white">{{ $notification }}</label>
+							<a href="#" class="close">&times;</a>
+						</div>
+					<br>
+					@endif
+					@include('backend.mainpage')
+				</div>
+			</div>
+		</div>
+
 	@else
 		@include('student.payments')
 	@endif
+
+<!-- ADD USER MODAL -->
+
+<div id="due_date" class="reveal-modal small" data-reveal>
+{{ Form::open(array('url'=>'update/due_date')) }}
+	<div class="panel modal-title cus-pan-hd-3 radius">
+		<label class="size-18 label-black large-12 label-ln-ht-1">Update Student's Due Date</label>
+	</div>
+	<div class="row">
+		<br><br>
+		<div class="large-12 columns">
+			{{ Form::label('', "Down Payment Date *", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
+			{{ Form::text('down_payment', $p_d1 , array('class' => 'radius', 'id'=>'dp1', 'placeholder' => "Enter Student's Down Payment")) }}
+		</div>
+
+		<div class="large-12 columns">
+			{{ Form::label('', "2nd Payment *", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
+			{{ Form::text('sec_payment', $p_d2 , array('class' => 'radius', 'id'=>'dp2','placeholder' => "Enter Student's 2nd Payment")) }}
+		</div>
+
+		<div class="large-12 columns">
+			{{ Form::label('', "3rd Payment *", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
+			{{ Form::text('thrd_payment', $p_d3 , array('class' => 'radius', 'id'=>'dp3','placeholder' => "Enter Student's 3rd Payment")) }}
+		</div>
+
+		<div class="large-12 columns">
+			{{ Form::label('', "4th Payment", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
+			{{ Form::text('fth_payment', $p_d4, array('class' => 'radius', 'id'=>'dp4','placeholder' => "Enter Student's 4th Payment")) }}
+		</div>
+
+		<div class="large-12 columns">
+			{{ Form::label('', "5th Payment *", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
+			{{ Form::text('ffth_payment', $p_d5, array('class' => 'radius', 'id'=>'dp5','placeholder' => "Enter Student's 5th Payment")) }}
+		</div>
+
+		<div class="large-12 columns">
+		<br><br>
+			{{ Form::submit('Update' , $attributes = array('class' => 'size-14 nsi-btn button tiny radius right', 'name' => 'submit')) }}
+		</div>
+		<a class="close-reveal-modal">&#215;</a>
+	</div>
+	{{ Form::close() }}
+</div>
+
 
 
 <!-- ADD USER MODAL -->
@@ -75,7 +134,7 @@
 			
 			<br>
 			<div class="custom-separator"></div>
-			{{ Form::submit('Import File', ["class"=>"button tiny nsi-btn radius size-14 right"]) }}
+			{{ Form::submit('Import File', ["class"=>"button tiny nsi-btn radius size-14 right", "onclick"=>"myFunction()"]) }}
 			<br><br>
 			<label class="size-14 label-black"><i>Uploading files may take time depending on the amount items you are importing to.</i></label>
 		</div>
@@ -84,6 +143,22 @@
 	</div>
 </div>
 
+<!-- PAYMENT BREAKDOWN -->
+<div id="notify" class="reveal-modal medium" data-reveal>
+{{ Form::open(array("url"=>"notify_students")) }}
+	<div class="panel modal-title cus-pan-hd-3 radius">
+		<label class="size-18 label-black large-12 label-ln-ht-1">Student's who will be notified</label>
+	</div>
+	<div class="row">
+		<div class="large-12 columns" style=" margin-left: 1.5rem; ">
+			<br><br>
+			<table id="notif_students" class="dtable" style="width: 100%; margin-left: -4;"></table>
+			<a class="close-reveal-modal" style=" margin-top: -2.5rem; ">&#215;</a>
+		</div>
+	</div>
+	{{ Form::submit('Notify Students', ["class"=>"button tiny nsi-btn radius size-14 right"]) }}
+{{ Form::close() }}
+</div>
 
 <!--IMPORT MODAL-->
 <div id="payment_modal" class="reveal-modal small" data-reveal>
@@ -120,70 +195,26 @@
 		<label class="size-18 label-black large-12 label-ln-ht-1">Payment Breakdown</label>
 	</div>
 	<div class="row">
-		<div class="large-6 columns">
-		<br><br>
-			{{ Form::label('', "Athletic Fee", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('outstanding_balance', $student_info->athletic_fee , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "ERM", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $student_info->erm , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "Internet Fee", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $student_info->internet_fee , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "NYC", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $student_info->nyc , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "Physics Lab", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $student_info->physics_lab , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "Student Events", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $student_info->student_events , array('class' => 'radius', 'readOnly')) }}
+		<div class="large-12 columns" style=" margin-left: 1.5rem; ">
+			<br><br>
+			<table id="breakdown" class="dtable" style="width: 100%; margin-left: -4;"></table>
+			<a class="close-reveal-modal" style=" margin-top: -2.5rem; ">&#215;</a>
 		</div>
-		<br><br>
-		<div class="large-6 columns">
-			{{ Form::label('', "Amadeus", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $student_info->amadeus , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "Consumables", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $student_info->consumables , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "Thesis Fee", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $student_info->thesis_fee , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "ACCTG 1 Set", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $student_info->acctg1_set , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "ACCTG 2 Set", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $student_info->acctg2_set , array('class' => 'radius', 'readOnly')) }}
-		</div>
-		<a class="close-reveal-modal">&#215;</a>
 	</div>
 </div>
 
-<div id="persem" class="reveal-modal small" data-reveal>
+<!-- PAYMENT HISTORY -->
+<div id="payment_history" class="reveal-modal medium" data-reveal>
 	<div class="panel modal-title cus-pan-hd-3 radius">
-		<label class="size-18 label-black large-12 label-ln-ht-1">Per/Sem Breakdown</label>
+		<label class="size-18 label-black large-12 label-ln-ht-1">Payment History</label>
 	</div>
 	<div class="row">
-		<div class="large-12 columns">
-		<br><br>
-		<div class="large-12 columns">
-			{{ Form::label('', "PRELIM", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $student_info->prelim , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "MIDTERM", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $student_info->midterm , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "PRE FINAL", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $student_info->pre_final , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "FINALS", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $student_info->final , array('class' => 'radius', 'readOnly')) }}
+		<div class="large-12 columns"  style=" margin-left: 1.5rem; ">
+			<br><br>
+			<table id="p_history" class="dtable" style="width: 100%; margin-left: -4;"></table>
+			<a class="close-reveal-modal" style=" margin-top: -2.5rem; ">&#215;</a>
 		</div>
-		
 	</div>
-	<a class="close-reveal-modal">&#215;</a>
 </div>
 @endif
 

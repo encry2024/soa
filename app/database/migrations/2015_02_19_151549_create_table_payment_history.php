@@ -21,6 +21,7 @@ class CreateTablePaymentHistory extends Migration {
 			$table->string('amount');
 			$table->string('date_of_payment');
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

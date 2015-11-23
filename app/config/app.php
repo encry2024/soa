@@ -78,7 +78,7 @@ return array(
 	|
 	*/
 
-	'key' => 'YourSecretKey!!!',
+	'key' => 'KorrR4lwBqAksjc1jNddWLC8oMCBraQY',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -94,6 +94,8 @@ return array(
 	*/
 
 	'providers' => array(
+		'Intervention\Helper\StringServiceProvider',
+		'Barryvdh\DomPDF\ServiceProvider',
 		'Maatwebsite\Excel\ExcelServiceProvider',
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
 		'Illuminate\Auth\AuthServiceProvider',
@@ -149,6 +151,8 @@ return array(
 	*/
 
 	'aliases' => array(
+		'String' 			=> 'Intervention\Helper\Facades\String',
+		'PDF' 				=> 'Barryvdh\DomPDF\Facade',
 		'Excel' 			=> 'Maatwebsite\Excel\Facades\Excel',
 		'App'               => 'Illuminate\Support\Facades\App',
 		'Artisan'           => 'Illuminate\Support\Facades\Artisan',

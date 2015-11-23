@@ -1,4 +1,4 @@
-
+ 
 
 
 
@@ -6,10 +6,43 @@
 @if($user->type == "student")
 
 	@include('student.payments')
-
+	
+	<div id="user_info" class="reveal-modal small" data-reveal>
+		
+		<div class="panel modal-title cus-pan-hd-3 radius">
+			<label class="size-18 label-black large-12 label-ln-ht-1">Student Information </label>
+		</div>
+		
+		<br><br>
+		{{ Form::open(array('url' => 'update/student/'. $user->id )) }}
+		<label>
+			Student No#
+			{{ Form::text('stud_no', $user->username, ['class'=>'radius', 'readOnly']) }}
+		</label>
+		<br>
+		<label>
+			Full Name
+			{{ Form::text('stud_name', $user->lastname .', '. $user->firstname, ['class'=>'radius', 'readOnly']) }}
+		</label>
+		<br>
+		<label>
+			Phone Number
+			{{ Form::text('phnumber', $user->phonenumber, ['class'=>'radius']) }}
+		</label>
+		<br>
+		<label>
+			E-mail
+			{{ Form::email('email', $user->email, ['class'=>'radius']) }}
+		</label>
+		<br>
+		<div class="custom-separator"></div>
+		<br>
+		{{ Form::submit('Save Changes', $attributes = array('class' => 'right button radius login-btn large-3 label-white tiny size-14')) }}
+		{{ link_to('#', 'Cancel', $attributes = array('class' => 'close-reveal-modal right button radius login-btn large-3 label-white tiny size-14', 'style'=>'position: relative !important; line-height: 1.3;')) }}
+		{{ Form::close() }}
 @endif
 
-@if($user->type == "Cashier")
+@if($user->type == "cashier")
 
 <div class="row">
 	<div class="large-10 columns large-centered" style="margin-left: 13rem;">
@@ -56,57 +89,11 @@
 		<label class="size-18 label-black large-12 label-ln-ht-1">Payment Breakdown</label>
 	</div>
 	<div class="row">
-		<div class="large-4 columns">
-		<br><br>
-			{{ Form::label('', "Athletic Fee", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('outstanding_balance', $u_a->athletic_fee , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "ERM", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $u_a->erm , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "Internet Fee", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $u_a->internet_fee , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "NYC", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $u_a->nyc , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "Physics Lab", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $u_a->physics_lab , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "Student Events", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $u_a->student_events , array('class' => 'radius', 'readOnly')) }}
+		<div class="large-12 columns" style=" margin-left: 1.5rem; ">
+			<br><br>
+			<table id="breakdown" class="dtable" style="width: 100%; margin-left: -4;"></table>
+			<a class="close-reveal-modal" style=" margin-top: -2.5rem; ">&#215;</a>
 		</div>
-		<br><br>
-		<div class="large-4 columns">
-			{{ Form::label('', "Amadeus", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $u_a->amadeus , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "Consumables", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $u_a->consumables , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "Thesis Fee", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $u_a->thesis_fee , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "ACCTG 1 Set", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $u_a->acctg1_set , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "ACCTG 2 Set", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $u_a->acctg2_set , array('class' => 'radius', 'readOnly')) }}
-		</div>
-		<div class="large-4 columns">
-			{{ Form::label('', "PRELIM", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $u_a->prelim , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "MIDTERM", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $u_a->midterm , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "PRE FINAL", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $u_a->pre_final , array('class' => 'radius', 'readOnly')) }}
-
-			{{ Form::label('', "FINALS", array('class'=>'size-16 label-black', 'id'=>'Font')) }}
-			{{ Form::text('total', $u_a->final , array('class' => 'radius', 'readOnly')) }}
-		</div>
-		<a class="close-reveal-modal">&#215;</a>
 	</div>
 </div>
 @endif

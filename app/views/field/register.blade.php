@@ -18,7 +18,10 @@
 		{{ Form::text('username', '', ['class'=>'error radius size-20 text-center text-height-5 textbox-height', 'placeholder'=>'Enter Username', 'name'=>'username']) }}
 		@if ($errors->has('username')) <small class="error"><i class="fi-alert"> </i>{{ $errors->first('username') }}</small> @endif
 		<br>
-		{{ Form::password('password', ['class'=>'error radius size-20 text-center text-height-5 textbox-height', 'placeholder'=>'Enter Password', 'name'=>'password']) }}
+		{{ Form::text('email', '', ['class'=>'error radius size-20 text-center text-height-5 textbox-height', 'placeholder'=>'Enter your Email', 'name'=>'email']) }}
+		@if ($errors->has('email')) <small class="error"><i class="fi-alert"> </i>{{ $errors->first('email') }}</small> @endif
+		<br>
+		{{ Form::password('password',['class'=>'error radius size-20 text-center text-height-5 textbox-height', 'placeholder'=>'Enter Password', 'name'=>'password']) }}
 		@if ($errors->has('password')) <small class="error"><i class="fi-alert"> </i>{{ $errors->first('password') }}</small> @endif
 		<br>
 		{{ Form::password('password_confirmation', ['class'=>'error radius size-20 text-center text-height-5 textbox-height', 'placeholder'=>'Confirm Password']) }}

@@ -23,7 +23,7 @@
 	<div class="large-5 columns large-centered">
 		<label class="size-16 ">Enter your Student Number:</label>
 		<br>
-		{{ Form::text('student_no', '', array('class'=>'inputField text-center size-16 h-3 radius', 'placeholder'=>"Enter Student Number", 'style'=>" border-bottom-left-radius: 0px")) }}
+		{{ Form::text('student_no', '', array('class'=>'inputField text-center size-16 h-3 radius', 'placeholder'=>"Enter Student Number e.x ( ###-####-#### )", 'style'=>" border-bottom-left-radius: 0px")) }}
 		{{ Form::submit('Submit', ["class"=>"login-btn button small radius right", "style"=>"border-width: 1px;"]) }}
 	</div>
 	

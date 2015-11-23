@@ -3,6 +3,7 @@
 @section('head')
 <!-- LOGIN UTILITIES -->
 	@include('utilities.login')
+
 <!--  -->
 @endsection
 

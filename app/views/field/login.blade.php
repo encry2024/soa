@@ -28,13 +28,13 @@
 		
 		<br>
 		<div class="large-6 small-12 columns large-centered">
-			<button class="button login-btn small radius left size-14" type="submit" style="border-radius: 30px;">
+			<button class="button login-btn small radius right size-14" type="submit" style="border-radius: 30px;">
 				<i class="fi-check"></i>
 				<span>Login</span>
 			</button>
 		</div>
 			<div class="large-6 small-12 columns large-centered">
-			<a href="{{ URL::to('/sentry/student') }}" class="button login-btn small radius right size-14" type="submit" style="border-radius: 30px;">
+			<a href="{{ URL::to('/sentry/student') }}" class="button login-btn small radius left size-14" type="submit" style="border-radius: 30px;">
 				<i class="fi-torsos-all"></i>
 				<span>Student Registration</span></a>
 		</div>
